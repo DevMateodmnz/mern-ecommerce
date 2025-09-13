@@ -14,7 +14,7 @@ const mailgun = require('../../services/mailgun');
 const keys = require('../../config/keys');
 const { EMAIL_PROVIDER, JWT_COOKIE } = require('../../constants');
 
-const { secret, tokenLife } = keys.jwt;
+const { secret, tokenLife, refreshTokenLife } = keys.jwt;
 
 router.post('/login', async (req, res) => {
   try {
@@ -57,14 +57,19 @@ router.post('/login', async (req, res) => {
     };
 
     const token = jwt.sign(payload, secret, { expiresIn: tokenLife });
+    const refreshToken = jwt.sign(payload, secret, { expiresIn: refreshTokenLife });
 
-    if (!token) {
+    if (!token || !refreshToken) {
       throw new Error();
     }
+
+    user.refreshToken = refreshToken;
+    await user.save();
 
     res.status(200).json({
       success: true,
       token: `Bearer ${token}`,
+      refreshToken: refreshToken,
       user: {
         id: user.id,
         firstName: user.firstName,
@@ -140,11 +145,16 @@ router.post('/register', async (req, res) => {
     );
 
     const token = jwt.sign(payload, secret, { expiresIn: tokenLife });
+    const refreshToken = jwt.sign(payload, secret, { expiresIn: refreshTokenLife });
+
+    registeredUser.refreshToken = refreshToken;
+    await registeredUser.save();
 
     res.status(200).json({
       success: true,
       subscribed,
       token: `Bearer ${token}`,
+      refreshToken: refreshToken,
       user: {
         id: registeredUser.id,
         firstName: registeredUser.firstName,
@@ -286,6 +296,44 @@ router.post('/reset', auth, async (req, res) => {
       success: true,
       message:
         'Password changed successfully. Please login with your new password.'
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: 'Your request could not be processed. Please try again.'
+    });
+  }
+});
+
+router.post('/refresh', async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      return res.status(400).json({ error: 'Refresh token is required.' });
+    }
+
+    const user = await User.findOne({ refreshToken });
+    if (!user) {
+      return res.status(403).json({ error: 'Invalid refresh token.' });
+    }
+
+    jwt.verify(refreshToken, secret, (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ error: 'Invalid refresh token.' });
+      }
+
+      const payload = { id: user.id };
+      const newToken = jwt.sign(payload, secret, { expiresIn: tokenLife });
+      const newRefreshToken = jwt.sign(payload, secret, { expiresIn: refreshTokenLife });
+
+      user.refreshToken = newRefreshToken;
+      user.save();
+
+      res.status(200).json({
+        success: true,
+        token: `Bearer ${newToken}`,
+        refreshToken: newRefreshToken
+      });
     });
   } catch (error) {
     res.status(400).json({

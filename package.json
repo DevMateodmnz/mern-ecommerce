@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mohamedsamara/mern-ecommerce.git"
+    "url": "git+https://github.com/mateodominguez/mern-ecommerce.git"
   },
   "keywords": [
     "node",
@@ -25,12 +25,12 @@
     "redux-thunk",
     "webpack"
   ],
-  "author": "Mohamed Samara (https://github.com/mohamedsamara)",
+  "author": "Mateo Dominguez (https://github.com/mateodominguez)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mohamedsamara/mern-ecommerce/issues"
+    "url": "https://github.com/mateodominguez/mern-ecommerce/issues"
   },
-  "homepage": "https://github.com/mohamedsamara/mern-ecommerce#readme",
+  "homepage": "https://github.com/mateodominguez/mern-ecommerce#readme",
   "devDependencies": {
     "cross-env": "^5.2.1",
     "npm-run-all": "^4.1.5"
