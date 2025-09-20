@@ -85,7 +85,7 @@ This will create an admin user and populate the database with sample products, c
   ```bash
   docker-compose up --build
   ```
-  This will start the client on port 8080, server on port 5000, and a MongoDB container.
+  This will start the client on port 8080, server on port 5000, and a MongoDB container
 
 - Or run manually:
   - Start backend server:
