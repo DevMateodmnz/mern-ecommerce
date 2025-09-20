@@ -94,10 +94,10 @@ This will create an admin user and populate the database with sample products, c
     npm run dev
     ```
   - Start frontend client:
-    ```bash
+    ``bash
     cd frontend
     npm run dev
-    ```
+    ``
 
 ## Running Tests
 Currently, there are no automated tests configured for this project.
