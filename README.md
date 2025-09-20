@@ -103,7 +103,7 @@ This will create an admin user and populate the database with sample products, c
 Currently, there are no automated tests configured for this project.
 
 ## Deployment
-The backend is configured for deployment on Vercel using the `vercel.json` configuration file.
+The backend is configured for deployment on Vercel using the `vercel.json` configuration file
 
 For production deployment, build the frontend and serve it with a static server or integrate with the backend.
 
