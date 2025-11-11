@@ -1,0 +1,3 @@
+- [x] Update color props in AnalyticsCard components to yellow shades (e.g., from-emerald-500 to-teal-700 -> from-yellow-500 to-amber-700, etc.)
+- [x] Change bg-gradient in AnalyticsCard to yellow (from-emerald-600 to-emerald-900 -> from-yellow-600 to-yellow-900)
+- [x] Update LineChart stroke color to yellow (#10B981 -> #F59E0B)

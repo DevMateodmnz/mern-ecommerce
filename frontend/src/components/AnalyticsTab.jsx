@@ -41,25 +41,25 @@ const AnalyticsTab = () => {
 					title='Total Users'
 					value={analyticsData.users.toLocaleString()}
 					icon={Users}
-					color='from-emerald-500 to-teal-700'
+					color='from-yellow-500 to-amber-700'
 				/>
 				<AnalyticsCard
 					title='Total Products'
 					value={analyticsData.products.toLocaleString()}
 					icon={Package}
-					color='from-emerald-500 to-green-700'
+					color='from-yellow-500 to-orange-700'
 				/>
 				<AnalyticsCard
 					title='Total Sales'
 					value={analyticsData.totalSales.toLocaleString()}
 					icon={ShoppingCart}
-					color='from-emerald-500 to-cyan-700'
+					color='from-yellow-500 to-yellow-700'
 				/>
 				<AnalyticsCard
 					title='Total Revenue'
 					value={`$${analyticsData.totalRevenue.toLocaleString()}`}
 					icon={DollarSign}
-					color='from-emerald-500 to-lime-700'
+					color='from-yellow-500 to-amber-600'
 				/>
 			</div>
 			<motion.div
@@ -80,7 +80,7 @@ const AnalyticsTab = () => {
 							yAxisId='left'
 							type='monotone'
 							dataKey='sales'
-							stroke='#10B981'
+							stroke='#F59E0B'
 							activeDot={{ r: 8 }}
 							name='Sales'
 						/>
@@ -113,7 +113,7 @@ const AnalyticsCard = ({ title, value, icon: Icon, color }) => (
 				<h3 className='text-white text-3xl font-bold'>{value}</h3>
 			</div>
 		</div>
-		<div className='absolute inset-0 bg-gradient-to-br from-emerald-600 to-emerald-900 opacity-30' />
+		<div className='absolute inset-0 bg-gradient-to-br from-yellow-600 to-yellow-900 opacity-30' />
 		<div className='absolute -bottom-4 -right-4 text-emerald-800 opacity-50'>
 			<Icon className='h-32 w-32' />
 		</div>
